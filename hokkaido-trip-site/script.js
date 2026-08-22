@@ -1,5 +1,56 @@
 const tripDays = Object.freeze([
   {
+    day: 0,
+    date: "9/12（六）",
+    fullDate: "2026 年 9 月 12 日・星期六",
+    route: "台北 → 香港 → 札幌",
+    note: "所有航班時間皆為當地時間。香港抵達第 1 航廈後，需前往第 2 航廈搭乘下一段航班。",
+    stay: null,
+    schedule: [
+      {
+        period: "航班 HB711",
+        title: "台北桃園 → 香港",
+        description: "起飛 02:55｜抵達 04:45（飛行 1 小時 50 分）\n出發：臺灣桃園國際機場 第 1 航廈（T1）\n抵達：香港國際機場 第 1 航廈（T1）",
+        locations: [
+          {
+            name: "桃園機場 T1",
+            mapUrl: "https://www.google.com/maps/search/?api=1&query=Taiwan+Taoyuan+International+Airport+Terminal+1",
+          },
+          {
+            name: "香港機場 T1",
+            mapUrl: "https://www.google.com/maps/search/?api=1&query=Hong+Kong+International+Airport+Terminal+1",
+          },
+        ],
+      },
+      {
+        period: "轉機",
+        title: "香港機場 T1 → T2",
+        description: "轉機時間 4 小時 20 分\n04:45 抵達香港 T1，下一班 09:05 由香港 T2 起飛。請依機場指示預留航廈移動與登機時間。",
+        locations: [
+          {
+            name: "香港機場 T2",
+            mapUrl: "https://www.google.com/maps/search/?api=1&query=Hong+Kong+International+Airport+Terminal+2",
+          },
+        ],
+      },
+      {
+        period: "航班 HB880",
+        title: "香港 → 新千歲",
+        description: "起飛 09:05｜抵達 15:05（飛行 5 小時）\n出發：香港國際機場 第 2 航廈（T2）\n抵達：新千歲機場 國際線航廈",
+        locations: [
+          {
+            name: "香港機場 T2",
+            mapUrl: "https://www.google.com/maps/search/?api=1&query=Hong+Kong+International+Airport+Terminal+2",
+          },
+          {
+            name: "新千歲機場國際線航廈",
+            mapUrl: "https://www.google.com/maps/search/?api=1&query=New+Chitose+Airport+International+Terminal",
+          },
+        ],
+      },
+    ],
+  },
+  {
     day: 1,
     date: "9/12（六）",
     fullDate: "2026 年 9 月 12 日・星期六",
@@ -13,7 +64,7 @@ const tripDays = Object.freeze([
       {
         period: "下午",
         title: "抵達北海道，前往札幌",
-        description: "15:00 抵達新千歲機場，完成入境與領取行李後，搭 JR 前往札幌。",
+        description: "15:05 抵達新千歲機場國際線航廈，完成入境與領取行李後，搭 JR 前往札幌。",
         locations: [
           {
             name: "新千歲機場",
@@ -393,33 +444,44 @@ const tripDays = Object.freeze([
     day: 9,
     date: "9/20（日）",
     fullDate: "2026 年 9 月 20 日・星期日",
-    route: "札幌 → 新千歲機場",
-    note: "05:30～06:00 離開飯店並搭 JR 前往機場，請依航班時間預留報到與安檢時間。",
+    route: "札幌 → 台北桃園",
+    note: "VZ571 於 09:00 起飛，建議 05:30～06:00 離開飯店，前往新千歲機場國際線航廈辦理報到與安檢。航班時間皆為當地時間。",
     stay: null,
     schedule: [
       {
         period: "清晨",
         title: "前往新千歲機場",
-        description: "早起退房，搭乘 JR 前往機場。",
+        description: "05:30～06:00 退房並搭乘 JR，前往新千歲機場國際線航廈。",
         locations: [
           {
-            name: "新千歲機場",
-            mapUrl: "https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E5%8D%83%E6%AD%B2%E6%A9%9F%E5%A0%B4%20%E5%8C%97%E6%B5%B7%E9%81%93",
+            name: "新千歲機場國際線航廈",
+            mapUrl: "https://www.google.com/maps/search/?api=1&query=New+Chitose+Airport+International+Terminal",
           },
         ],
       },
       {
-        period: "上午",
-        title: "伴手禮採購與返台",
-        description: "採購 Royce、白色戀人與北海道限定伴手禮，搭乘 09:00 班機回台灣。候機時間充裕可前往機場溫泉。",
+        period: "機場",
+        title: "報到與最後採購",
+        description: "完成報到與安檢後，視候機時間採購 Royce、白色戀人與北海道限定伴手禮。",
         locations: [
           {
             name: "Royce' Chocolate World",
             mapUrl: "https://www.google.com/maps/search/?api=1&query=Royce%20Chocolate%20World%20%E6%96%B0%E5%8D%83%E6%AD%B2%E6%A9%9F%E5%A0%B4",
           },
+        ],
+      },
+      {
+        period: "航班 VZ571",
+        title: "新千歲 → 台北桃園",
+        description: "起飛 09:00｜抵達 12:25（飛行 4 小時 25 分）\n出發：新千歲機場 國際線航廈\n抵達：臺灣桃園國際機場 第 1 航廈（T1）",
+        locations: [
           {
-            name: "新千歲機場溫泉",
-            mapUrl: "https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E5%8D%83%E6%AD%B2%E6%A9%9F%E5%A0%B4%E6%BA%AB%E6%B3%89",
+            name: "新千歲機場國際線航廈",
+            mapUrl: "https://www.google.com/maps/search/?api=1&query=New+Chitose+Airport+International+Terminal",
+          },
+          {
+            name: "桃園機場 T1",
+            mapUrl: "https://www.google.com/maps/search/?api=1&query=Taiwan+Taoyuan+International+Airport+Terminal+1",
           },
         ],
       },
@@ -501,8 +563,11 @@ function updateSelectedTab(selectedDay) {
 }
 
 function updateNavigationButtons(day) {
-  const previousDay = tripDays[day.day - 2];
-  const nextDay = tripDays[day.day];
+  const currentIndex = tripDays.findIndex(function findCurrentDay(item) {
+    return item.day === day.day;
+  });
+  const previousDay = tripDays[currentIndex - 1];
+  const nextDay = tripDays[currentIndex + 1];
 
   previousDayTop.disabled = !previousDay;
   previousDayBottom.disabled = !previousDay;
@@ -563,12 +628,15 @@ function renderDay(dayNumber, scrollTarget) {
 }
 
 function changeDay(offset, scrollTarget) {
-  const nextDayNumber = activeDayNumber + offset;
-  if (nextDayNumber < 1 || nextDayNumber > tripDays.length) {
+  const activeDayIndex = tripDays.findIndex(function findActiveDay(item) {
+    return item.day === activeDayNumber;
+  });
+  const nextDay = tripDays[activeDayIndex + offset];
+  if (!nextDay) {
     return;
   }
 
-  renderDay(nextDayNumber, scrollTarget);
+  renderDay(nextDay.day, scrollTarget);
 }
 
 function handlePreviousTopClick() {
@@ -616,7 +684,10 @@ function createDayTab(day) {
 
     event.preventDefault();
     const offset = event.key === "ArrowRight" ? 1 : -1;
-    const nextIndex = (day.day - 1 + offset + tripDays.length) % tripDays.length;
+    const currentIndex = tripDays.findIndex(function findCurrentDay(item) {
+      return item.day === day.day;
+    });
+    const nextIndex = (currentIndex + offset + tripDays.length) % tripDays.length;
     const nextDay = tripDays[nextIndex];
     renderDay(nextDay.day, null);
     dayTabs.querySelector(`[data-day="${nextDay.day}"]`).focus();
