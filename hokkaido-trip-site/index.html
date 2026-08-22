@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="2026 北海道 9 天自駕旅行行程，包含每日景點、交通提醒與 Google Maps 導航。"
+    />
+    <meta name="theme-color" content="#173b35" />
+    <title>北海道 9 天自駕行程</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#day-content">直接前往行程</a>
+
+    <header class="hero">
+      <div class="hero__inner">
+        <p class="hero__eyebrow">HOKKAIDO ROAD TRIP</p>
+        <h1>北海道<br />9 天自駕行程</h1>
+        <p class="hero__date">2026.09.12 — 09.20</p>
+        <div class="hero__summary" aria-label="行程摘要">
+          <span>9 天</span>
+          <span>5 段自駕</span>
+          <span>札幌出發</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="day-picker" aria-labelledby="day-picker-title">
+        <div class="section-heading">
+          <p class="section-heading__label">SELECT A DAY</p>
+          <h2 id="day-picker-title">選擇日期</h2>
+        </div>
+        <div id="day-tabs" class="day-tabs" role="tablist" aria-label="選擇行程日期"></div>
+      </section>
+
+      <section id="day-content" class="day-content" aria-live="polite" tabindex="-1">
+        <div class="day-heading">
+          <div>
+            <p id="current-day-number" class="day-heading__number"></p>
+            <h2 id="current-route"></h2>
+          </div>
+          <p id="current-date" class="day-heading__date"></p>
+        </div>
+
+        <div id="schedule-list" class="schedule-list"></div>
+
+        <aside class="trip-note" aria-labelledby="trip-note-title">
+          <p class="trip-note__icon" aria-hidden="true">i</p>
+          <div>
+            <h3 id="trip-note-title">交通與備註</h3>
+            <p id="current-note"></p>
+          </div>
+        </aside>
+
+        <aside id="stay-card" class="stay-card" aria-labelledby="stay-title">
+          <div>
+            <p class="stay-card__label">TONIGHT</p>
+            <h3 id="stay-title">今晚住宿</h3>
+            <p id="stay-name"></p>
+          </div>
+          <a id="stay-link" class="map-link map-link--dark" target="_blank" rel="noopener noreferrer">
+            <span aria-hidden="true">↗</span>
+            查看住宿地點
+          </a>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <p>北海道 9 天自駕行程 · 2026</p>
+      <p>行程與活動可能因天候調整，出發前請再次確認營業資訊。</p>
+    </footer>
+  </body>
+</html>
