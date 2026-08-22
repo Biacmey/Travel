@@ -506,7 +506,7 @@ const previousDayBottom = document.querySelector("#previous-day-bottom");
 const nextDayBottom = document.querySelector("#next-day-bottom");
 const previousDayLabel = document.querySelector("#previous-day-label");
 const nextDayLabel = document.querySelector("#next-day-label");
-let activeDayNumber = 1;
+let activeDayNumber = 0;
 
 function createMapLink(location) {
   const link = document.createElement("a");
@@ -698,12 +698,12 @@ function createDayTab(day) {
 
 function getInitialDay() {
   const match = window.location.hash.match(/^#day-(\d)$/);
-  const dayNumber = match ? Number(match[1]) : 1;
+  const dayNumber = match ? Number(match[1]) : 0;
   return tripDays.some(function hasDay(item) {
     return item.day === dayNumber;
   })
     ? dayNumber
-    : 1;
+    : 0;
 }
 
 function initialize() {
