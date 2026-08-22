@@ -436,6 +436,15 @@ const scheduleList = document.querySelector("#schedule-list");
 const stayCard = document.querySelector("#stay-card");
 const stayName = document.querySelector("#stay-name");
 const stayLink = document.querySelector("#stay-link");
+const dayPicker = document.querySelector(".day-picker");
+const dayContent = document.querySelector("#day-content");
+const previousDayTop = document.querySelector("#previous-day-top");
+const nextDayTop = document.querySelector("#next-day-top");
+const previousDayBottom = document.querySelector("#previous-day-bottom");
+const nextDayBottom = document.querySelector("#next-day-bottom");
+const previousDayLabel = document.querySelector("#previous-day-label");
+const nextDayLabel = document.querySelector("#next-day-label");
+let activeDayNumber = 1;
 
 function createMapLink(location) {
   const link = document.createElement("a");
@@ -491,7 +500,27 @@ function updateSelectedTab(selectedDay) {
   });
 }
 
-function renderDay(dayNumber, shouldFocus) {
+function updateNavigationButtons(day) {
+  const previousDay = tripDays[day.day - 2];
+  const nextDay = tripDays[day.day];
+
+  previousDayTop.disabled = !previousDay;
+  previousDayBottom.disabled = !previousDay;
+  nextDayTop.disabled = !nextDay;
+  nextDayBottom.disabled = !nextDay;
+
+  previousDayTop.setAttribute("aria-label", previousDay ? `上一天：第 ${previousDay.day} 天` : "已是第一天");
+  nextDayTop.setAttribute("aria-label", nextDay ? `下一天：第 ${nextDay.day} 天` : "已是最後一天");
+  previousDayLabel.textContent = previousDay ? `DAY ${previousDay.day} · ${previousDay.date}` : "已是第一天";
+  nextDayLabel.textContent = nextDay ? `DAY ${nextDay.day} · ${nextDay.date}` : "已是最後一天";
+}
+
+function scrollSelectedTabIntoView(dayNumber) {
+  const selectedTab = dayTabs.querySelector(`[data-day="${dayNumber}"]`);
+  selectedTab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+}
+
+function renderDay(dayNumber, scrollTarget) {
   const day = tripDays.find(function findDay(item) {
     return item.day === dayNumber;
   });
@@ -515,13 +544,47 @@ function renderDay(dayNumber, shouldFocus) {
     stayCard.hidden = true;
   }
 
+  activeDayNumber = day.day;
   updateSelectedTab(day.day);
+  updateNavigationButtons(day);
+  scrollSelectedTabIntoView(day.day);
   window.history.replaceState(null, "", `#day-${day.day}`);
 
-  if (shouldFocus) {
-    document.querySelector("#day-content").focus({ preventScroll: true });
-    document.querySelector("#day-content").scrollIntoView({ behavior: "smooth", block: "start" });
+  if (scrollTarget === "content") {
+    dayContent.focus({ preventScroll: true });
+    dayContent.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+
+  if (scrollTarget === "picker") {
+    const selectedTab = dayTabs.querySelector(`[data-day="${day.day}"]`);
+    selectedTab.focus({ preventScroll: true });
+    dayPicker.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function changeDay(offset, scrollTarget) {
+  const nextDayNumber = activeDayNumber + offset;
+  if (nextDayNumber < 1 || nextDayNumber > tripDays.length) {
+    return;
+  }
+
+  renderDay(nextDayNumber, scrollTarget);
+}
+
+function handlePreviousTopClick() {
+  changeDay(-1, null);
+}
+
+function handleNextTopClick() {
+  changeDay(1, null);
+}
+
+function handlePreviousBottomClick() {
+  changeDay(-1, "picker");
+}
+
+function handleNextBottomClick() {
+  changeDay(1, "picker");
 }
 
 function createDayTab(day) {
@@ -543,7 +606,7 @@ function createDayTab(day) {
   button.append(dayLabel, dateLabel);
 
   button.addEventListener("click", function handleClick() {
-    renderDay(day.day, true);
+    renderDay(day.day, "content");
   });
 
   button.addEventListener("keydown", function handleArrowKey(event) {
@@ -555,7 +618,7 @@ function createDayTab(day) {
     const offset = event.key === "ArrowRight" ? 1 : -1;
     const nextIndex = (day.day - 1 + offset + tripDays.length) % tripDays.length;
     const nextDay = tripDays[nextIndex];
-    renderDay(nextDay.day, false);
+    renderDay(nextDay.day, null);
     dayTabs.querySelector(`[data-day="${nextDay.day}"]`).focus();
   });
 
@@ -574,7 +637,11 @@ function getInitialDay() {
 
 function initialize() {
   dayTabs.replaceChildren(...tripDays.map(createDayTab));
-  renderDay(getInitialDay(), false);
+  previousDayTop.addEventListener("click", handlePreviousTopClick);
+  nextDayTop.addEventListener("click", handleNextTopClick);
+  previousDayBottom.addEventListener("click", handlePreviousBottomClick);
+  nextDayBottom.addEventListener("click", handleNextBottomClick);
+  renderDay(getInitialDay(), null);
 }
 
 initialize();

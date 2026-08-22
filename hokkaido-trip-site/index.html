@@ -31,8 +31,18 @@
     <main>
       <section class="day-picker" aria-labelledby="day-picker-title">
         <div class="section-heading">
-          <p class="section-heading__label">SELECT A DAY</p>
-          <h2 id="day-picker-title">選擇日期</h2>
+          <div class="section-heading__copy">
+            <p class="section-heading__label">SELECT A DAY</p>
+            <h2 id="day-picker-title">選擇日期</h2>
+          </div>
+          <div class="day-arrow-controls" role="group" aria-label="快速切換日期">
+            <button id="previous-day-top" class="day-arrow-button" type="button" aria-label="上一天">
+              <span aria-hidden="true">←</span>
+            </button>
+            <button id="next-day-top" class="day-arrow-button" type="button" aria-label="下一天">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
         </div>
         <div id="day-tabs" class="day-tabs" role="tablist" aria-label="選擇行程日期"></div>
       </section>
@@ -67,6 +77,17 @@
             查看住宿地點
           </a>
         </aside>
+
+        <nav class="day-pagination" aria-label="切換前後日期">
+          <button id="previous-day-bottom" class="day-pagination__button" type="button">
+            <span class="day-pagination__direction">← 上一天</span>
+            <span id="previous-day-label" class="day-pagination__label"></span>
+          </button>
+          <button id="next-day-bottom" class="day-pagination__button day-pagination__button--next" type="button">
+            <span class="day-pagination__direction">下一天 →</span>
+            <span id="next-day-label" class="day-pagination__label"></span>
+          </button>
+        </nav>
       </section>
     </main>
 
