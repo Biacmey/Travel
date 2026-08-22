@@ -477,11 +477,11 @@ main {
   text-align: right;
 }
 
-.day-pagination__button:hover:not(:disabled) {
+.day-pagination__button:active:not(:disabled) {
   border-color: var(--forest);
   color: white;
   background: var(--forest);
-  transform: translateY(-2px);
+  transform: translateY(0);
 }
 
 .day-pagination__button:disabled {
@@ -499,6 +499,15 @@ main {
   margin-top: 3px;
   font-family: Georgia, "Noto Serif TC", serif;
   font-size: 1.12rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .day-pagination__button:hover:not(:disabled) {
+    border-color: var(--forest);
+    color: white;
+    background: var(--forest);
+    transform: translateY(-2px);
+  }
 }
 
 footer {
