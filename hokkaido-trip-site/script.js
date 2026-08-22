@@ -498,14 +498,9 @@ const scheduleList = document.querySelector("#schedule-list");
 const stayCard = document.querySelector("#stay-card");
 const stayName = document.querySelector("#stay-name");
 const stayLink = document.querySelector("#stay-link");
-const dayPicker = document.querySelector(".day-picker");
 const dayContent = document.querySelector("#day-content");
 const previousDayTop = document.querySelector("#previous-day-top");
 const nextDayTop = document.querySelector("#next-day-top");
-const previousDayBottom = document.querySelector("#previous-day-bottom");
-const nextDayBottom = document.querySelector("#next-day-bottom");
-const previousDayLabel = document.querySelector("#previous-day-label");
-const nextDayLabel = document.querySelector("#next-day-label");
 let activeDayNumber = 0;
 
 function createMapLink(location) {
@@ -570,14 +565,10 @@ function updateNavigationButtons(day) {
   const nextDay = tripDays[currentIndex + 1];
 
   previousDayTop.disabled = !previousDay;
-  previousDayBottom.disabled = !previousDay;
   nextDayTop.disabled = !nextDay;
-  nextDayBottom.disabled = !nextDay;
 
   previousDayTop.setAttribute("aria-label", previousDay ? `上一天：第 ${previousDay.day} 天` : "已是第一天");
   nextDayTop.setAttribute("aria-label", nextDay ? `下一天：第 ${nextDay.day} 天` : "已是最後一天");
-  previousDayLabel.textContent = previousDay ? `DAY ${previousDay.day} · ${previousDay.date}` : "已是第一天";
-  nextDayLabel.textContent = nextDay ? `DAY ${nextDay.day} · ${nextDay.date}` : "已是最後一天";
 }
 
 function scrollSelectedTabIntoView(dayNumber) {
@@ -620,18 +611,17 @@ function renderDay(dayNumber, scrollTarget) {
     dayContent.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  if (scrollTarget === "picker") {
-    const selectedTab = dayTabs.querySelector(`[data-day="${day.day}"]`);
-    selectedTab.focus({ preventScroll: true });
-    dayPicker.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
 }
 
-function changeDay(offset, scrollTarget) {
+function getAdjacentDay(offset) {
   const activeDayIndex = tripDays.findIndex(function findActiveDay(item) {
     return item.day === activeDayNumber;
   });
-  const nextDay = tripDays[activeDayIndex + offset];
+  return tripDays[activeDayIndex + offset];
+}
+
+function changeDay(offset, scrollTarget) {
+  const nextDay = getAdjacentDay(offset);
   if (!nextDay) {
     return;
   }
@@ -645,14 +635,6 @@ function handlePreviousTopClick() {
 
 function handleNextTopClick() {
   changeDay(1, null);
-}
-
-function handlePreviousBottomClick() {
-  changeDay(-1, "picker");
-}
-
-function handleNextBottomClick() {
-  changeDay(1, "picker");
 }
 
 function createDayTab(day) {
@@ -710,8 +692,6 @@ function initialize() {
   dayTabs.replaceChildren(...tripDays.map(createDayTab));
   previousDayTop.addEventListener("click", handlePreviousTopClick);
   nextDayTop.addEventListener("click", handleNextTopClick);
-  previousDayBottom.addEventListener("click", handlePreviousBottomClick);
-  nextDayBottom.addEventListener("click", handleNextBottomClick);
   renderDay(getInitialDay(), null);
 }
 
