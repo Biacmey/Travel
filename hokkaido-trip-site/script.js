@@ -59,8 +59,8 @@ const tripDays = Object.freeze([
         description: "完成取車後開始自駕行程，前往旭川。",
         locations: [
           {
-            name: "札幌車站取車區域",
-            mapUrl: "https://www.google.com/maps/search/?api=1&query=%E6%9C%AD%E5%B9%8C%E8%BB%8A%E7%AB%99",
+            name: "租車地點｜KITA 7 JO HIGASHI",
+            mapUrl: "https://www.google.com/maps/place/KITA+7+JO+HIGASHI,+1-ch%C5%8Dme-1-1+Kita+7+J%C5%8Dhigashi,+Higashi+Ward,+Sapporo,+Hokkaido+060-0907%E6%97%A5%E6%9C%AC/@43.0699194,141.3540747,18z/data=!3m1!4b1!4m7!3m6!1s0x5f0b297337f3e071:0x4a8a2425232d3c67!8m2!3d43.0699194!4d141.3553622!15sCj0xLTEtMSBraXRhLTctasWNLWhpZ2FzaGksIEhpaGlnYXNoaS1rdSwgU2FwcG9yby1zaGksIEhva2thaWRvkgERY29tcG91bmRfYnVpbGRpbmfgAQA!16s%2Fg%2F11t2x8c47l?entry=tts&g_ep=EgoyMDI2MDcyMC4wIPu8ASoASAFQAw%3D%3D&skid=d1767814-ec32-4373-a984-feb230dfc547",
           },
         ],
       },
